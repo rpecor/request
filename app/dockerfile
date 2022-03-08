@@ -1,0 +1,11 @@
+FROM node:12.18.1
+
+WORKDIR /app
+
+COPY ["package.json", "package-lock.json*", "./"]
+
+RUN npm ci --production
+
+COPY . .
+
+CMD [ "node", "src/000.js" ]
