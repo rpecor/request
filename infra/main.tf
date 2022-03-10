@@ -40,6 +40,7 @@ resource "azurerm_app_service_plan" "request_asp" {
   location            = var.location
   resource_group_name = azurerm_resource_group.request.name
   kind                = "Linux"
+  reserved            = true
   per_site_scaling    = "true"
   sku {
     tier     = "Basic"
