@@ -59,7 +59,7 @@ resource "azurerm_app_service" "request_container" {
   https_only          = true
   site_config {
     always_on                 = "false"
-    linux_fx_version          = "DOCKER|https://ghcr.io/rpecor/request:${var.deploy_ID}"
+    linux_fx_version          = "DOCKER|ghcr.io/rpecor/request:${var.deploy_ID}"
     health_check_path         = "/health"
     use_32_bit_worker_process = false
   }
