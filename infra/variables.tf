@@ -1,14 +1,18 @@
 variable "location" {
-  type = string
+  type    = string
   default = "eastus2"
 }
 
 variable "projectName" {
-  type = string
+  type    = string
   default = "request"
 }
 
 variable "env" {
-  type = string
+  type    = string
   default = "np"
+}
+
+variable "deploy_ID" {
+  type = string
 }
