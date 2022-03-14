@@ -9,6 +9,7 @@ terraform {
     hostname     = "app.terraform.io"
     organization = "rpecor"
 
+# prefixed workspaces to support multiple environments in the future
     workspaces {
       prefix = "request-"
     }
@@ -35,6 +36,7 @@ resource "azurerm_resource_group" "request" {
   tags = local.tags
 }
 
+# Create the App Service Plan, specifying SKU and capacity (instance count)
 resource "azurerm_app_service_plan" "request_asp" {
   name                = "${local.naming}-asp"
   location            = var.location
@@ -51,6 +53,7 @@ resource "azurerm_app_service_plan" "request_asp" {
   tags = local.tags
 }
 
+# Build the service that runs on the App Service Plan 
 resource "azurerm_app_service" "request_container" {
   name                = "${local.naming}-rc"
   location            = var.location
@@ -59,7 +62,7 @@ resource "azurerm_app_service" "request_container" {
   https_only          = true
   site_config {
     always_on                 = "false"
-    linux_fx_version          = "DOCKER|ghcr.io/rpecor/request:${var.deploy_ID}"
+    linux_fx_version          = "DOCKER|ghcr.io/rpecor/request:${var.deploy_ID}" # this VAR is set in TFC, can be changed to update image or roll back
     health_check_path         = "/health"
     use_32_bit_worker_process = false
   }

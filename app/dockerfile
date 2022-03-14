@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY ["package.json", "package-lock.json*", "./"]
 
+# Azure wasn't recognized, couldn't get the secret word :(
 ENV SECRET_WORD=searching
 
 RUN npm ci --production
